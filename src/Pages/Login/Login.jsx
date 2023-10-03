@@ -1,27 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { loginUser } from "../../redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import {
+  googleUserLogin,
+  loginUser,
+} from "../../redux/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 function Login() {
   const { handleSubmit, control } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const { email, isLoading } = useSelector((state) => state.userSlice);
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const onSubmit = ({ email, password }) => {
     dispatch(loginUser({ email, password }));
-    navigate("/")
-    toast.success("Successfully Login")
-    console.log(email, password);
   };
+
+  const handleGoogleLogin = () => {
+    dispatch(googleUserLogin());
+  };
+
+  useEffect(() => {
+    if (email && !isLoading) {
+      navigate("/");
+      toast.success("Successfully Login");
+    }
+  }, [email, isLoading]);
 
   return (
     <div className="bg-gray-200 w-full min-h-screen flex items-center justify-center">
@@ -116,7 +128,7 @@ function Login() {
             <div className="w-full h-[1px] bg-gray-300"></div>
           </div>
 
-          <div className="text-sm">
+          <div onClick={handleGoogleLogin} className="text-sm">
             <a
               href="#"
               className="flex items-center justify-center space-x-2 text-gray-600 my-2 py-2 bg-gray-100 hover:bg-gray-200 rounded"
@@ -148,7 +160,7 @@ function Login() {
                   fill="#ea4335"
                 ></path>
               </svg>
-              <span>Login with Google</span>
+              <button>Login with Google</button>
             </a>
           </div>
         </div>

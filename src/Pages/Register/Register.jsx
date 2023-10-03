@@ -1,25 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { createUser } from "../../redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
-
+import { Link, useNavigate } from "react-router-dom";
+import {
+  createUser,
+  googleUserLogin,
+} from "../../redux/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 function Register() {
   const { handleSubmit, control } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  
+  const navigate = useNavigate();
+  const { email, isLoading } = useSelector((state) => state.userSlice);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  
-  const dispatch = useDispatch()
 
-  const onSubmit = ({name, email, password}) => {
-    dispatch(createUser({email, password, name}))
-    console.log(name, email, password)
+  const dispatch = useDispatch();
+
+  const onSubmit = ({ name, email, password }) => {
+    dispatch(createUser({ email, password, name }));
   };
+
+  const handleGoogleLogin = () => {
+    dispatch(googleUserLogin());
+  };
+
+  useEffect(() => {
+    if (email && !isLoading) {
+      navigate("/");
+      toast.success("Successfully Login");
+    }
+  }, [email, isLoading]);
 
   return (
     <div className="bg-gray-200 w-full min-h-screen flex items-center justify-center">
@@ -179,7 +193,7 @@ function Register() {
             <div className="w-full h-[1px] bg-gray-300"></div>
           </div>
 
-          <div className="text-sm">
+          <div onClick={handleGoogleLogin} className="text-sm">
             <a
               href="#"
               className="flex items-center justify-center space-x-2 text-gray-600 my-2 py-2 bg-gray-100 hover:bg-gray-200 rounded"

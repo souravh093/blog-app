@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply rounded-xl px-4 grid place-content-center font-semibold transition-all;
+}
+
+.btn-primary {
+  @apply bg-primary text-gray-50;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-gray-50;
+}

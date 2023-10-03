@@ -1,8 +1,13 @@
 import React from "react";
 import asideImage from "../../../assets/aside.jpg";
 import Container from "../../../components/Container/Container";
+import { useGetRecentBlogsQuery } from "../../../redux/features/blogs/blogSlice";
+import RecentBlog from "./RecentBlog/RecentBlog";
+import Loading from "../../../components/Loading/Loading";
 
 const Hero = () => {
+  const { data: blogs, isLoading, isError } = useGetRecentBlogsQuery();
+
   return (
     <div className="mt-10">
       <Container>
@@ -84,6 +89,13 @@ const Hero = () => {
           {/* hero sidebar */}
           <div className="con-span-1">
             <img src={asideImage} alt="hero sidebar image" />
+            <div>
+              {isLoading ? (
+                <h2>Loading...</h2>
+              ) : (
+                blogs?.map((blog) => <RecentBlog key={blog._id} blog={blog} />)
+              )}
+            </div>
           </div>
         </div>
       </Container>

@@ -3,11 +3,10 @@ import asideImage from "../../../assets/aside.jpg";
 import Container from "../../../components/Container/Container";
 import { useGetRecentBlogsQuery, useGetRecentHeroBlogsQuery } from "../../../redux/features/blogs/blogSlice";
 import RecentBlog from "./RecentBlog/RecentBlog";
-import Loading from "../../../components/Loading/Loading";
 import HeroCard from "./HeroCard/HeroCard";
 
 const Hero = () => {
-  const { data: blogs, isLoading, isError } = useGetRecentBlogsQuery();
+  const { data: blogs, isLoading } = useGetRecentBlogsQuery();
   const {data: heroBlog, isLoading: heroLoading} = useGetRecentHeroBlogsQuery()
   return (
     <div className="mt-10">

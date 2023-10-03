@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { Link, useNavigate } from "react-router-dom";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { loginUser } from "../../redux/features/user/userSlice";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 function Login() {
   const { handleSubmit, control } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = (data) => {
-    console.log(data); // You can handle login submission here
+  const onSubmit = ({ email, password }) => {
+    dispatch(loginUser({ email, password }));
+    navigate("/")
+    toast.success("Successfully Login")
+    console.log(email, password);
   };
 
   return (
@@ -87,11 +95,7 @@ function Login() {
                   type="button"
                   className="absolute right-2 bg-transparent flex items-center justify-center text-gray-700"
                 >
-                  {showPassword ? (
-                    <AiFillEye />
-                  ) : (
-                    <AiFillEyeInvisible />
-                  )}
+                  {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
                 </button>
               </div>
             </div>

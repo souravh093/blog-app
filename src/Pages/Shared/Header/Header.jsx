@@ -3,8 +3,20 @@ import Container from "../../../components/Container/Container";
 import Logo from "../../../components/Logo/Logo";
 import Menu from "../../../components/Menu/Menu";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/features/user/userSlice";
+import { signOut } from "firebase/auth";
+import auth from "../../../firebase/firebase.config";
 
 const Header = () => {
+  const { isLoading, email } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    signOut(auth);
+    dispatch(logout());
+  };
+  console.log(email);
   return (
     <div className="py-3 bg-purple-50">
       <Container>
@@ -17,9 +29,18 @@ const Header = () => {
               <Menu />
             </div>
           </div>
-          <div className="flex item-center space-x-5">
-            <button className="text-primary font-semibold">Subscribe</button>
-            <Link to={"/login"}>Sign in</Link>
+          <div className="flex items-center space-x-5 ">
+            {email && !isLoading && (
+              <Link className="text-primary font-semibold">Post a Blog</Link>
+            )}
+            {email && !isLoading ? (
+              <div className="flex gap-2">
+                <button onClick={handleLogout}>Logout</button>
+                <button className="btn btn-primary py-2">Dashboard</button>
+              </div>
+            ) : (
+              <Link to={"/login"}>Sign in</Link>
+            )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -8,7 +8,7 @@ import GadgetCard from "./GadgetCard/GadgetCard";
 const Gadget = () => {
   const { data: gadgetBlogs, isLoading } = useGetGadgetRecentBlogsQuery();
   return (
-    <div className="mt-20">
+    <div className="my-20">
       <Container>
         <div>
           <div className="flex items-center justify-between mb-5">

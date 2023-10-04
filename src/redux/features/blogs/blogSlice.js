@@ -21,6 +21,9 @@ const blogApi = baseApi.injectEndpoints({
     getSingleBlog: builder.query({
       query: (id) => `/blog/${id}`,
     }),
+    getSimilarBlog: builder.query({
+      query: (category) => `/similarBlogs/${category}`,
+    }),
   }),
 });
 
@@ -30,5 +33,7 @@ export const {
   useGetRecentHeroBlogsQuery,
   useGetRecentTechnologyBlogsQuery,
   useGetGadgetRecentBlogsQuery,
-  useGetSingleBlogQuery
+  useGetSingleBlogQuery,
+  useGetSimilarBlogQuery
 } = blogApi;
+

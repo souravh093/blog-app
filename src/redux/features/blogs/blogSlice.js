@@ -18,6 +18,9 @@ const blogApi = baseApi.injectEndpoints({
     getGadgetRecentBlogs: builder.query({
       query: () => "/recentGadgetBlogs",
     }),
+    getSingleBlog: builder.query({
+      query: (id) => `/blog/${id}`,
+    }),
   }),
 });
 
@@ -26,5 +29,6 @@ export const {
   useGetRecentBlogsAppsQuery,
   useGetRecentHeroBlogsQuery,
   useGetRecentTechnologyBlogsQuery,
-  useGetGadgetRecentBlogsQuery
+  useGetGadgetRecentBlogsQuery,
+  useGetSingleBlogQuery
 } = blogApi;

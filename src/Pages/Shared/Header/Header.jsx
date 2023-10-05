@@ -31,7 +31,7 @@ const Header = () => {
           </div>
           <div className="flex items-center space-x-5 ">
             {email && !isLoading && (
-              <Link className="text-primary font-semibold">Post a Blog</Link>
+              <Link to={"/writeBlog"} className="text-primary font-semibold">Post a Blog</Link>
             )}
             {email && !isLoading ? (
               <div className="flex gap-2">

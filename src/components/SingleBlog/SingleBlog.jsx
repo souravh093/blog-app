@@ -9,7 +9,6 @@ import Container from "../Container/Container";
 import AppPickCard from "../../Pages/Home/AppsPick/AppPickCard/AppPickCard";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import toast from "react-hot-toast";
 
 const SingleBlog = () => {
   const { id } = useParams();
@@ -23,10 +22,9 @@ const SingleBlog = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const [addComment, { data: commentAdd, error }] = useAddCommentMutation();
+  const [addComment] = useAddCommentMutation();
 
   const onSubmit = (data) => {
-    console.log(data);
     const commentData = {
       name,
       email,
@@ -37,7 +35,6 @@ const SingleBlog = () => {
     reset();
     console.log(data);
   };
-
 
   return (
     <div className="bg-red-50 p-20">
@@ -83,7 +80,6 @@ const SingleBlog = () => {
 
                       <div>
                         <h3 className="font-bold">
-
                           {com.name ? com.name : com.comment.name}
                         </h3>
                         <h3 className="font-bold">

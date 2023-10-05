@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const GadgetCard = ({ blog }) => {
   const { category, title, descOne, image } = blog;
   return (
-    <div
+    <Link
+      to={`/blog/${blog._id}`}
       className="h-96"
       style={{
         backgroundImage: `url(${image})`,
@@ -14,7 +16,7 @@ const GadgetCard = ({ blog }) => {
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="line-clamp-2">{descOne}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -8,21 +8,38 @@ const blogApi = baseApi.injectEndpoints({
     }),
     getRecentBlogsApps: builder.query({
       query: () => "/recentBlogsApps",
+      providesTags: ["Blogs"],
     }),
     getRecentHeroBlogs: builder.query({
       query: () => "/recentHeroBlog",
+      providesTags: ["Blogs"],
     }),
     getRecentTechnologyBlogs: builder.query({
       query: () => "/recentTechnologyBlog",
+      providesTags: ["Blogs"],
     }),
     getGadgetRecentBlogs: builder.query({
       query: () => "/recentGadgetBlogs",
+      providesTags: ["Blogs"],
     }),
     getSingleBlog: builder.query({
       query: (id) => `/blog/${id}`,
+      providesTags: ["Blogs"],
     }),
     getSimilarBlog: builder.query({
       query: (category) => `/similarBlogs/${category}`,
+      providesTags: ["Blogs"],
+    }),
+    addComment: builder.mutation({
+      query: ({ id, commentData }) => ({
+        url: `/addComment/${id}`,
+        method: "PUT",
+        body: commentData,
+      }),
+      invalidatesTags: ["Blogs"],
+    }),
+    getComments: builder.query({
+      query: (id) => `/getComments/${id}`,
     }),
   }),
 });
@@ -34,6 +51,6 @@ export const {
   useGetRecentTechnologyBlogsQuery,
   useGetGadgetRecentBlogsQuery,
   useGetSingleBlogQuery,
-  useGetSimilarBlogQuery
+  useGetSimilarBlogQuery,
+  useAddCommentMutation,
 } = blogApi;
-

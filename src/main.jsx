@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <RouterProvider router={routes} />
       <UserAuthListener />
-      <Toaster/>
+      <Toaster />
     </Provider>
   </React.StrictMode>
 );

@@ -1,8 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
-import auth from "../../firebase/firebase.config";
 import { useDispatch } from "react-redux";
 import { setUser, toggleLoading } from "../../redux/features/user/userSlice";
+import { auth } from "../../firebase/firebase.config";
 
 const UserAuthListener = () => {
   const dispatch = useDispatch();

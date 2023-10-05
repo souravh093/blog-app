@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
-import auth from "../../../firebase/firebase.config";
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { auth } from "../../../firebase/firebase.config";
 
 const initialState = {
   name: "",

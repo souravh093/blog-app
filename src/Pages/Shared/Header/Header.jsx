@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/features/user/userSlice";
 import { signOut } from "firebase/auth";
-import auth from "../../../firebase/firebase.config";
+import { auth } from "../../../firebase/firebase.config";
 
 const Header = () => {
   const { isLoading, email } = useSelector((state) => state.userSlice);

@@ -8,10 +8,26 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { useSelector } from "react-redux";
+import CreatableSelect from "react-select/creatable";
+import { useAddBlogMutation } from "../../redux/features/blogs/blogSlice";
 
 const storage = getStorage();
 
 const WritePost = () => {
+  const [addBlogData, { data, isError, isLoading }] = useAddBlogMutation();
+  console.log(data)
+  const [categoryOption, setCategoryOption] = useState("");
+  const category = [
+    { value: "technology", label: "Technology" },
+    { value: "programming", label: "Programming" },
+    { value: "app", label: "App" },
+    { value: "gadget", label: "Gadget" },
+    { value: "lifestyle", label: "Lifestyle" },
+    { value: "review", label: "Review" },
+    { value: "health", label: "Health" },
+  ];
+  const { email, name } = useSelector((state) => state.userSlice);
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState("");
   const [value, setValue] = useState("");
@@ -74,10 +90,15 @@ const WritePost = () => {
   const handleSubmit = () => {
     const post = {
       title,
-      desc: value,
-      img: media,
+      descOne: value,
+      image: media,
       slug: slugify(title),
+      writer: name,
+      email,
+      date: new Date(),
+      category: categoryOption.value,
     };
+    addBlogData(post);
     console.log(post);
   };
 
@@ -88,7 +109,16 @@ const WritePost = () => {
     >
       <Container>
         <div>
-          <div className="flex justify-end mt-10">
+          <div className="flex justify-between mt-10 items-center mb-5">
+            <div>
+              <CreatableSelect
+                className="w-60"
+                isClearable
+                options={category}
+                defaultInputValue={categoryOption}
+                onChange={setCategoryOption}
+              />
+            </div>
             <button
               onClick={handleSubmit}
               className="mt-5 bg-primary px-10 text-white py-2 rounded-3xl hover:text-gray-200 hover:shadow-xl"
@@ -139,19 +169,6 @@ const WritePost = () => {
                 />
               </label>
             </div>
-            {/* <div className="flex gap-5 z-20 bg-white/50 left-12">
-              <input
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}
-                id="image"
-                className="hidden"
-              />
-              <button className="w-[36px] h-[36px] rounded-full bg-transparent border border-primary flex items-center justify-center cursor-pointer">
-                <label className="cursor-pointer" htmlFor="image">
-                  <BsImage />
-                </label>
-              </button>
-            </div> */}
 
             <ReactQuill
               className="w-full h-96"

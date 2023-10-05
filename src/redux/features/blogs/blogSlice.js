@@ -41,6 +41,14 @@ const blogApi = baseApi.injectEndpoints({
     getComments: builder.query({
       query: (id) => `/getComments/${id}`,
     }),
+    addBlog: builder.mutation({
+      query: (post) => ({
+        url: `/addBlog`,
+        method: "POST",
+        body: post,
+      }),
+      invalidatesTags: ["Blogs"],
+    }),
   }),
 });
 
@@ -53,4 +61,5 @@ export const {
   useGetSingleBlogQuery,
   useGetSimilarBlogQuery,
   useAddCommentMutation,
+  useAddBlogMutation,
 } = blogApi;

@@ -31,12 +31,20 @@ const Header = () => {
           </div>
           <div className="flex items-center space-x-5 ">
             {email && !isLoading && (
-              <Link to={"/writeBlog"} className="text-primary font-semibold">Post a Blog</Link>
+              <Link to={"/writeBlog"} className="text-primary font-semibold">
+                Post a Blog
+              </Link>
             )}
             {email && !isLoading ? (
               <div className="flex gap-2">
                 <button onClick={handleLogout}>Logout</button>
-                <button className="btn btn-primary py-2">Dashboard</button>
+                <div>
+                  <img
+                    src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                    alt="user demo image"
+                    className="w-10 h-10 hover:ring-2 hover:ring-primary rounded-full"
+                  />
+                </div>
               </div>
             ) : (
               <Link to={"/login"}>Sign in</Link>

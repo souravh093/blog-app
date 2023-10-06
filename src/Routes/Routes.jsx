@@ -5,6 +5,7 @@ import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import SingleBlog from "../components/SingleBlog/SingleBlog";
 import WritePost from "../Pages/WritePost/WritePost";
+import Dashboard from "../Dashboard/Dashboard";
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
         path: "/writeBlog",
         element: <WritePost />,
       },
+      {
+        path: "/dashboard",
+        element: <Dashboard />
+      }
     ],
   },
   {

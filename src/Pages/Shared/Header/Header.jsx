@@ -3,19 +3,12 @@ import Container from "../../../components/Container/Container";
 import Logo from "../../../components/Logo/Logo";
 import Menu from "../../../components/Menu/Menu";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/features/user/userSlice";
-import { signOut } from "firebase/auth";
-import { auth } from "../../../firebase/firebase.config";
+import { useSelector } from "react-redux";
+import ProfileDropdown from "../../../components/ProfileDropdown/ProfileDropdown";
 
 const Header = () => {
   const { isLoading, email } = useSelector((state) => state.userSlice);
-  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    signOut(auth);
-    dispatch(logout());
-  };
   console.log(email);
   return (
     <div className="py-3 bg-purple-50">
@@ -36,15 +29,8 @@ const Header = () => {
               </Link>
             )}
             {email && !isLoading ? (
-              <div className="flex gap-2">
-                <button onClick={handleLogout}>Logout</button>
-                <div>
-                  <img
-                    src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
-                    alt="user demo image"
-                    className="w-10 h-10 hover:ring-2 hover:ring-primary rounded-full"
-                  />
-                </div>
+              <div>
+                <ProfileDropdown />
               </div>
             ) : (
               <Link to={"/login"}>Sign in</Link>

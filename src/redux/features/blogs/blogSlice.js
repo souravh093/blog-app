@@ -49,6 +49,12 @@ const blogApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Blogs"],
     }),
+    getUserBlog: builder.query({
+      query: (email) => `/userBlogs/${email}`,
+    }),
+    getAllCategoryBlogs: builder.query({
+      query: (category) => `/categoryBlogs/${category}`,
+    }),
   }),
 });
 
@@ -62,4 +68,6 @@ export const {
   useGetSimilarBlogQuery,
   useAddCommentMutation,
   useAddBlogMutation,
+  useGetUserBlogQuery,
+  useGetAllCategoryBlogsQuery,
 } = blogApi;

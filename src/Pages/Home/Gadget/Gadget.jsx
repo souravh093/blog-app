@@ -15,7 +15,7 @@ const Gadget = () => {
             <h2 className="text-4xl font-bold">Must Read</h2>
             <Link
               className="text-primary text-2xl font-bold flex items-center gap-2"
-              to={"/"}
+              to={`/category/Gadget`}
             >
               View All <AiOutlineArrowRight />
             </Link>

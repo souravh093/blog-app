@@ -7,7 +7,7 @@ import ManageBlog from "./ManageBlog/ManageBlog";
 const Dashboard = () => {
   const { email } = useSelector((state) => state.userSlice);
   console.log(email);
-  const { data: userBlogData, isLoading, isError } = useGetUserBlogQuery(email);
+  const { data: userBlogData, isLoading } = useGetUserBlogQuery(email);
   console.log(userBlogData);
   return (
     <div className="mt-10 min-h-screen">

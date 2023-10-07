@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const HeroCard = ({ blog }) => {
   const { title, category, image, date, writer, descOne } = blog;
   return (
-    <div
+    <Link
+      to={`/blog/${blog._id}`}
       className="col-span-3 bg-cover h-[570px] bg-blend-overlay text-gray-50"
       style={{
         backgroundImage: `url(${image})`,
@@ -67,7 +69,7 @@ const HeroCard = ({ blog }) => {
         </div>
         <p className="line-clamp-2 max-w-xl leading-5">{descOne}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

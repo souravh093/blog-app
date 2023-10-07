@@ -6,6 +6,7 @@ import Login from "../Pages/Login/Login";
 import SingleBlog from "../components/SingleBlog/SingleBlog";
 import WritePost from "../Pages/WritePost/WritePost";
 import Dashboard from "../Dashboard/Dashboard";
+import CategoryWiseBlogs from "../Pages/CategoryWiseblogs/CategoryWiseblogs";
 
 const routes = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const routes = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />
+      },
+      {
+        path: "/category/:categoryName",
+        element: <CategoryWiseBlogs />
       }
     ],
   },

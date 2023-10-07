@@ -22,7 +22,7 @@ const AppsPick = () => {
               <h2 className="text-4xl font-bold">Apps Pick</h2>
               <Link
                 className="text-primary text-2xl font-bold flex items-center gap-2"
-                to={"/"}
+                to={`/category/Apps`}
               >
                 View All <AiOutlineArrowRight />
               </Link>

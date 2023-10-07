@@ -19,7 +19,7 @@ const TechReviews = () => {
               <h2 className="text-4xl font-bold">Tech Reviews</h2>
               <Link
                 className="text-primary text-2xl font-bold flex items-center gap-2"
-                to={"/"}
+                to={`/category/Technology`}
               >
                 View All <AiOutlineArrowRight />
               </Link>
